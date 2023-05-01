@@ -73,7 +73,7 @@ client.giveawayManager = new GiveawaysManager(client, {
 client.on("ready", () => {
     console.log('Bot is online.');
 
-    client.user.setStatus("idle");
+    client.user.setStatus("online");
 
 })
 
