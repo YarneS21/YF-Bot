@@ -1,0 +1,32 @@
+{
+    "name": "YourForums Bot",
+    "version": "1.0.0",
+    "description": "YourForums Bot",
+    "main": "src/index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js"
+    },
+    "keywords": [
+      "Yes"
+    ],
+    "author": "Yarne",
+    "dependencies": {
+      "chalk": "4.1.2",
+      "discord.js": "^14.2.0",
+      "fs": "^0.0.1-security",
+      "glob": "^8.0.3",
+      "ms": "^2.1.3",
+      "node-recursive-directory": "^1.2.0",
+      "path": "^0.12.7",
+      "mongoose": "5.13.17",
+      "node-fetch": "3.3.1",
+      "captcha-canvas": "^3.2.1",
+      "axios": "1.4.0",
+      "mathjs": "11.8.0",
+      "discord-giveaways": "^6.0.1",
+      "dotenv": "16.0.3",
+      "discord-html-transcripts": "^3.1.2"
+    } 
+  }
+  
