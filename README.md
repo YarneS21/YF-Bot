@@ -1,4 +1,4 @@
-/\/\ V1.0.0 by Yarne /\/\
+/\ V1.0.0 by Yarne \\
 
 Features List:
 - Avatar
