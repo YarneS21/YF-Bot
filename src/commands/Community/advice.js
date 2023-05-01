@@ -19,7 +19,7 @@ const {
       
       const embed = new EmbedBuilder()
       .setTimestamp()
-      .setThumbNail(config.picture)
+      .setThumbnail(config.picture)
       .setTitle('> Advice Given')
       .setFooter({ text: `🤝 Advice Fetched`})
       .setAuthor({ name: `🤝 Advice Randomizer`})
