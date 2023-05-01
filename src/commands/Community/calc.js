@@ -14,7 +14,7 @@ module.exports = {
             .setAuthor({ name: `🔢 Calculator Command`})
             .setDescription("```\nEmpty\n```")
             .setColor('DarkBlue')
-            .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081275127850864640/largeblue.png')
+            .setThumbNail(config.picture)
             .setTimestamp()
             .setTitle('> Calculator Interface')
             .setFooter({ text: `🔢 Calculator Displayed`})
@@ -154,7 +154,7 @@ module.exports = {
                 ) || data.length === 0 ? "" : " "}` + value;
             }
  
-            i.update({ embeds: [new EmbedBuilder().setFooter({ text: `🔢 Calculator Command`}).setTitle('> Calculator Interface').setTimestamp().setColor('DarkBlue').setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081275127850864640/largeblue.png').setDescription(`\`\`\`\n${data || extra}\n\`\`\``)], components: [row, row1, row2, row3, row4], ephemeral: false })
+            i.update({ embeds: [new EmbedBuilder().setFooter({ text: `🔢 Calculator Command`}).setTitle('> Calculator Interface').setTimestamp().setColor('DarkBlue').setThumbNail(config.picture).setDescription(`\`\`\`\n${data || extra}\n\`\`\``)], components: [row, row1, row2, row3, row4], ephemeral: false })
         })
     }
 }

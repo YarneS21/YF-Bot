@@ -19,7 +19,7 @@ const {
       
       const embed = new EmbedBuilder()
       .setTimestamp()
-      .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081275127850864640/largeblue.png')
+      .setThumbNail(config.picture)
       .setTitle('> Advice Given')
       .setFooter({ text: `🤝 Advice Fetched`})
       .setAuthor({ name: `🤝 Advice Randomizer`})
