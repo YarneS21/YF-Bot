@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const math = require('mathjs');
- 
+const config = require('../../../configs/config')
 module.exports = {
     developer: true,
     data: new SlashCommandBuilder()

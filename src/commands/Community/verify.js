@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionsBitField, EmbedBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const capschema = require('../../Schemas.js/verify');
-const config = require('../../../configs/config.js')
+const config = require('../../../configs/config')
 
 module.exports = {
     data: new SlashCommandBuilder()

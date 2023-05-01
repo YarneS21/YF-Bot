@@ -5,7 +5,9 @@ const {
   } = require("discord.js");
   const fetch = (...args) =>
     import("node-fetch").then(({ default: fetch }) => fetch(...args));
-  
+    const config = require('../../../configs/config')
+
+
   module.exports = {
     data: new SlashCommandBuilder()
       .setName("advice")

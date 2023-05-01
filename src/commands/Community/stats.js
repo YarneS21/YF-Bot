@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const config = require('../../../configs/config.js')
+const config = require('../../../configs/config')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('stats')

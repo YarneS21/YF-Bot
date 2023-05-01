@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
-
+const config = require('../../../configs/config')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('avatar')
