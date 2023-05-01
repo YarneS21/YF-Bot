@@ -4,7 +4,6 @@ const fs = require('fs');
 
 const clientId = '1101866908833300562'; 
 const guildId = '1043931375817994370'; 
-const credentials = require('../../configs/')
 
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
