@@ -1,5 +1,3 @@
-const { WelcomeChannel } = require("discord.js");
-
 module.exports = {
     developersIds: ["184333852267905024", "923541283383951430"],
     embedColor: "#75E6DA",

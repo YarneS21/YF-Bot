@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const clientId = '1101866908833300562'; 
 const guildId = '1043931375817994370'; 
+const credentials = require('../../configs/credentials')
 
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
@@ -19,7 +20,7 @@ module.exports = (client) => {
 
         const rest = new REST({
             version: '9'
-        }).setToken(process.env.token);
+        }).setToken(credentials.token);
 
         (async () => {
             try {

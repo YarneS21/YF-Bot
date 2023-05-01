@@ -58,14 +58,14 @@ client.giveawayManager = new GiveawaysManager(client, {
 });
 
 // Commands //
-
+const credentials = require('../configs/credentials')
 (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
     }
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandFolders, "./src/commands");
-    client.login(process.env.token)
+    client.login(credentials.token)
 })();
 
 // Status //
