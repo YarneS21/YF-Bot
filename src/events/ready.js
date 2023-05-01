@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-const credentials = require('../../configs/credentials')
-const mongodbURL = credentials.MONGODBURL;
+const mongodbURL = process.env.MONGODBURL;
 
 module.exports = {
     name: 'ready',
