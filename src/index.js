@@ -37,7 +37,7 @@ require('dotenv').config();
 const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 const commandFolders = fs.readdirSync("./src/commands");
-
+const credentials = require('../configs/credentials')
 // HANDLE ALL ERRORS!! //
 
 const process = require('node:process');
@@ -58,7 +58,7 @@ client.giveawayManager = new GiveawaysManager(client, {
 });
 
 // Commands //
-const credentials = require('../configs/credentials')
+
 (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
