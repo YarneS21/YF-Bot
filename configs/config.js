@@ -7,5 +7,5 @@ module.exports = {
     tick: "<:tick:1040008503617671261>",
     reply: "<:reply:1102276890946973867>",
     replyc: "<:replycont:1102276889843871874>",
-    welcomeChannel: "1051155398264098836"
+    welcomeChannel: "1099031745833214033"
 }
