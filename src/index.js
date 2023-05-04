@@ -354,6 +354,8 @@ client.on(Events.MessageDelete, async message => {
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
+    if(message.author.bot) {
+    } else {
     logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(":fire: Message Deleted")
@@ -364,6 +366,7 @@ client.on(Events.MessageDelete, async message => {
         .setTimestamp()
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setFooter({ text: `YourForums Logging System`})]})
+    }
 })
 
 //MESSAGE EDIT
