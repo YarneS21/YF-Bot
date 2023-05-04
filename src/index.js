@@ -354,19 +354,18 @@ client.on(Events.MessageDelete, async message => {
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
-    if(message.author.bot) {
-    } else {
-    logChan.send({ embeds: [new EmbedBuilder()
-        .setColor(config.embedColor)
-        .setTitle(":fire: Message Deleted")
-        .addFields({name: "Message Content", value: `${config.reply}${message.content.replace(/`/g,"'")}`, inline: false})
-        .addFields({name: "Message Channel", value: `${config.reply}${message.channel}`, inline: false})
-        .addFields({name: "Author", value: `${config.reply}${message.author} - ${message.author.tag}`, inline: false})
-        .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
-        .setTimestamp()
-        .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-        .setFooter({ text: `YourForums Logging System`})]})
-    }
+    if(message.author.me === false) {
+        logChan.send({ embeds: [new EmbedBuilder()
+            .setColor(config.embedColor)
+            .setTitle(":fire: Message Deleted")
+            .addFields({name: "Message Content", value: `${config.reply}${message.content.replace(/`/g,"'")}`, inline: false})
+            .addFields({name: "Message Channel", value: `${config.reply}${message.channel}`, inline: false})
+            .addFields({name: "Author", value: `${config.reply}${message.author} - ${message.author.tag}`, inline: false})
+            .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+            .setTimestamp()
+            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+            .setFooter({ text: `YourForums Logging System`})]})
+    } 
 })
 
 //MESSAGE EDIT
