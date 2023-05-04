@@ -351,8 +351,6 @@ client.on(Events.MessageDelete, async message => {
     let logs = await message.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
-    if (message.author.bot) return
-
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
