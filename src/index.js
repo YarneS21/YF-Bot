@@ -97,9 +97,8 @@ client.on(Events.MessageCreate, async message => {
         
         const embed = new EmbedBuilder()
         .setThumbnail(config.picture)
-        .setTitle(`${config.tick} Sticky Messages`)
         .setFooter({ text: config.footer})
-        .addFields({ name: '• Sticky Content', value: `${config.reply} ${data.Message}`})
+        .setDescription(`${config.reply} ${data.Message}`)
         .setColor(config.embedColor)
         .setTimestamp()
 
