@@ -594,7 +594,7 @@ const twitterClient = new Twitter({
 });
 
 // Replace 'twitteraccount' with the Twitter account you want to track
-client.stream('statuses/filter', {track: 'twitter'},  function(stream) {
+twitterClient.stream('statuses/filter', {track: 'twitter'},  function(stream) {
     stream.on('data', function(tweet) {
         const tweetEmbed = new EmbedBuilder()
         .setTitle(tweet.user.name)
