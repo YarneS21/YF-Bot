@@ -354,7 +354,7 @@ client.on(Events.MessageDelete, async message => {
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
-    if(message.author.bot) return
+    if(message.author.bot) return;
 
     logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
