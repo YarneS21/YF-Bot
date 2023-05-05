@@ -584,3 +584,31 @@ client.on(Events.InteractionCreate, async interaction => {
         }
     }
 })
+
+const Twitter = require('twitter');
+const twitterClient = new Twitter({
+  consumer_key: 'xxhBShAJUeuZJLx9QdLWJPh27',
+  consumer_secret: 'ccRvZzlqBuyQarYhaDJoGfdWLzGTFVPsnFk8LIkFDH5cbSawEJ',
+  access_token_key: '1416042413701861376-P5qsxXvnb2Rjf23BuPxdIWhQ1zKk7F',
+  access_token_secret: 'oZtzdQ50jeNgUPwDTXjiteePojhptl5DIxVtADiCkU2X0'
+});
+
+// Replace 'twitteraccount' with the Twitter account you want to track
+const twitterStream = twitterClient.stream('statuses/filter', { follow: 'yarne_s' });
+
+twitterStream.on('data', tweet => {
+  const tweetEmbed = new EmbedBuilder()
+    .setTitle(tweet.user.name)
+    .setURL(`https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
+    .setDescription(tweet.text)
+    .setTimestamp(new Date(tweet.created_at))
+    .setColor('#1da1f2')
+    .setAuthor('Twitter', 'https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Twitter-512.png');
+  
+  // Replace 'discordchannelid' with the ID of the Discord channel you want to post the tweet in
+  client.channels.cache.get(config.twitterChannel).send({ embeds: [tweetEmbed] });
+});
+
+twitterStream.on('error', error => {
+    console.error(error);
+});
