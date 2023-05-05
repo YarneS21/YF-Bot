@@ -347,7 +347,7 @@ client.on(Events.GuildBanRemove, async member => {
 
 //MESSAGE DELETE
 
-client.on(Events.MessageDelete, async message => {
+client.on('messageDelete', async message => {
     let logs = await message.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
