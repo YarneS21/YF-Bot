@@ -609,7 +609,3 @@ twitterClient.stream('statuses/filter', {track: 'twitter'},  function(stream) {
     });
     });
 
-
-twitterStream.on('error', error => {
-    console.error(error);
-});
