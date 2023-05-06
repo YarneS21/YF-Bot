@@ -347,15 +347,16 @@ client.on(Events.GuildBanRemove, async member => {
 
 //MESSAGE DELETE
 
-client.on('messageDelete', async (message) => {
+client.on(Events.MessageDelete, async (message) => {
     let logs = await message.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
-    if(!message.author.bot) {
-        logChan.send({ embeds: [new EmbedBuilder()
+    if(message.author.bot) return;
+
+    logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(":fire: Message Deleted")
         .addFields({name: "Message Content", value: `${config.reply}${message.content.replace(/`/g,"'")}`, inline: false})
@@ -364,7 +365,7 @@ client.on('messageDelete', async (message) => {
         .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
         .setTimestamp()
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-        .setFooter({ text: `YourForums Logging System`})]})}
+        .setFooter({ text: `YourForums Logging System`})]})
 })
 
 //MESSAGE EDIT
