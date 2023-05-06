@@ -347,6 +347,11 @@ client.on(Events.GuildBanRemove, async member => {
 
 //MESSAGE DELETE
 
+function send_log(embed) {
+    const logChannel = config.logChannel
+    logChannel.send({embeds: [embed]})
+}
+
 client.on("messageDelete", function (message) {
     // let logs = message.guild.fetchAuditLogs({type: 72});
     // let entry = logs.entries.first();
@@ -367,7 +372,7 @@ client.on("messageDelete", function (message) {
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setFooter({ text: `YourForums Logging System`})
 
-    return logChan.send({ embeds: embed})
+    return send_log(embed);
 })
 
 //MESSAGE EDIT
