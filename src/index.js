@@ -29,7 +29,8 @@ const warningSchema = require('./Schemas.js/warn');
 const { CaptchaGenerator } = require('captcha-canvas');
 const reactschema = require('./Schemas.js/reactionroles');
 const roleschema = require('./Schemas.js/autorole');
-const logSchema = require("../Schemas.js/logSchema");
+const logSchema = require("./Schemas.js/logSchema");
+const welcomeSchema = require("./Schemas.js/welcomeSchema");
 
 client.commands = new Collection();
 
@@ -403,7 +404,7 @@ client.on(Events.MessageUpdate, async (message, newMessage) => {
 // Welcome Message //
 
 client.on(Events.GuildMemberAdd, async (member, err) => {
-        const data = await logSchema.findOne({ Guild: guildId });
+        const data = await welcomeSchema.findOne({ Guild: guildId });
 
         const welcomeChannel = client.channels.cache.get(data.Channel);
 
@@ -443,7 +444,7 @@ client.on(Events.GuildMemberAdd, async (member, err) => {
 // MEMBER LEAVE
 
 client.on(Events.GuildMemberRemove, async (member, err) => {
-        const data = await logSchema.findOne({ Guild: guildId });
+        const data = await welcomeSchema.findOne({ Guild: guildId });
 
         const welcomeChannel = client.channels.cache.get(data.Channel);
 
