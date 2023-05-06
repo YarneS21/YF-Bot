@@ -347,12 +347,12 @@ client.on(Events.GuildBanRemove, async member => {
 
 //MESSAGE DELETE
 
-client.on(Events.MessageDelete, async (message) => {
-    let logs = await message.guild.fetchAuditLogs({type: 72});
+client.on("messageDelete", function (message) {
+    let logs = message.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
     const channelID = config.logChannel
-    const logChan = await client.channels.fetch(channelID)
+    const logChan = client.channels.fetch(channelID)
 
     if(message.author.bot) return;
 
