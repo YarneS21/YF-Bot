@@ -10,7 +10,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("audit-log") // Update this to your preference.
         .setDescription("Configure your logging system to receive audit logs.")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ViewChannel)
         .addChannelOption(option =>
             option.setName("channel")
                 .setDescription("Channel.")
