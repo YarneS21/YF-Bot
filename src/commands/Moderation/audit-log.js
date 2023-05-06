@@ -16,7 +16,7 @@ module.exports = {
  
     async execute(interaction) {
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ViewChannel)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.SendMessages)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
 
 
         const { channel, guildId, options } = interaction;
