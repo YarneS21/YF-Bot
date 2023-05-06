@@ -353,7 +353,8 @@ client.on(Events.MessageDelete, async (msg) => {
     let logs = await msg.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
-    const channelID = config.logChannel
+    const data = await logSchema.findOne({ Guild: msg.guild.id });
+    const channelID = client.channels.cache.get(data.Channel);
     const logChan = await client.channels.fetch(channelID)
 
    try {
