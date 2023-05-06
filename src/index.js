@@ -356,7 +356,7 @@ client.on("messageDelete", function (message) {
 
     if(message.author.bot) return;
 
-    logChan.send({ embeds: [new EmbedBuilder()
+    const embed = new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(":fire: Message Deleted")
         .addFields({name: "Message Content", value: `${config.reply}${message.content.replace(/`/g,"'")}`, inline: false})
@@ -365,7 +365,9 @@ client.on("messageDelete", function (message) {
         //.addFields({name: "Deleted By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
         .setTimestamp()
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-        .setFooter({ text: `YourForums Logging System`})]})
+        .setFooter({ text: `YourForums Logging System`})
+
+    return logChan.send({ embeds: embed})
 })
 
 //MESSAGE EDIT
