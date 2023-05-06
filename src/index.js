@@ -403,9 +403,11 @@ client.on(Events.MessageUpdate, async (message, newMessage) => {
 // Welcome Message //
 
 client.on(Events.GuildMemberAdd, async (member, err) => {
+        const data = await logSchema.findOne({ Guild: guildId });
 
-        const channelID = config.welcomeChannel;
-        const channelwelcome = member.guild.channels.cache.get(channelID)
+        const welcomeChannel = client.channels.cache.get(data.Channel);
+
+        const channelwelcome = member.guild.channels.cache.get(welcomeChannel)
 
         const roledata = await roleschema.findOne({ Guild: member.guild.id });
 
@@ -441,8 +443,11 @@ client.on(Events.GuildMemberAdd, async (member, err) => {
 // MEMBER LEAVE
 
 client.on(Events.GuildMemberRemove, async (member, err) => {
-        const channelID = config.welcomeChannel;
-        const channelwelcome = member.guild.channels.cache.get(channelID);
+        const data = await logSchema.findOne({ Guild: guildId });
+
+        const welcomeChannel = client.channels.cache.get(data.Channel);
+
+        const channelwelcome = member.guild.channels.cache.get(welcomeChannel)
 
         const embedleave = new EmbedBuilder()
         .setColor(config.embedColor)
