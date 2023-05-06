@@ -59,13 +59,16 @@ client.giveawayManager = new GiveawaysManager(client, {
 
 // Commands //
 
+const { logHandler } = require("./functions/logHandler");
+
 (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
     }
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandFolders, "./src/commands");
-    client.login(process.env.token)
+    client.login(process.env.token);
+    logHandler(client);
 })();
 
 // Status //
@@ -354,7 +357,6 @@ client.on(Events.MessageDelete, async (msg) => {
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
-   //if(msg.author.bot) return;
    try {
     logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
@@ -366,10 +368,9 @@ client.on(Events.MessageDelete, async (msg) => {
         .setTimestamp()
         .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
         .setFooter({ text: `YourForums Logging System`})]})
-} catch (err) {
-    return console.log(err);
-}
-
+    } catch (err) {
+        return console.log(err);
+    }
 })
 
 //MESSAGE EDIT
@@ -453,6 +454,7 @@ client.on(Events.GuildMemberRemove, async (member, err) => {
 
 const capschema = require('./Schemas.js/verify');
 const verifyusers = require('./Schemas.js/verifyusers');
+const { logHandler } = require('./functions/logHandler');
 
 client.on(Events.InteractionCreate, async interaction => {
 
