@@ -59,7 +59,7 @@ client.giveawayManager = new GiveawaysManager(client, {
 
 // Commands //
 
-const { logHandler } = require("./functions/logHandler");
+const { logHandler } = require("./utils/logHandler");
 
 (async () => {
     for (file of functions) {
