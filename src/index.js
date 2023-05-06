@@ -348,24 +348,28 @@ client.on(Events.GuildBanRemove, async member => {
 //MESSAGE DELETE
 
 client.on(Events.MessageDelete, async (msg) => {
-    //let logs = await msg.guild.fetchAuditLogs({type: 72});
-    //let entry = logs.entries.first();
+    let logs = await msg.guild.fetchAuditLogs({type: 72});
+    let entry = logs.entries.first();
 
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
    //if(msg.author.bot) return;
-
+   try {
     logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
         .setTitle(":fire: Message Deleted")
         .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
         .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
         .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
-        //.addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+        .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
         .setTimestamp()
         .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
         .setFooter({ text: `YourForums Logging System`})]})
+} catch (err) {
+    return console.log(err);
+}
+
 })
 
 //MESSAGE EDIT
