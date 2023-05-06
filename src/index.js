@@ -347,42 +347,14 @@ client.on(Events.GuildBanRemove, async member => {
 
 //MESSAGE DELETE
 
-// function send_log(embed) {
-//     const logChannel = config.logChannel
-//     logChannel.send({embeds: [embed]})
-// }
-
-// client.on("messageDelete", function (message) {
-//     // let logs = message.guild.fetchAuditLogs({type: 72});
-//     // let entry = logs.entries.first();
-
-//     const channelID = config.logChannel
-//     const logChan = client.channels.fetch(channelID)
-
-//     if(message.author.bot) return;
-
-//     const embed = new EmbedBuilder()
-//         .setColor(config.embedColor)
-//         .setTitle(":fire: Message Deleted")
-//         .addFields({name: "Message Content", value: `${config.reply}${message.content.replace(/`/g,"'")}`, inline: false})
-//         .addFields({name: "Message Channel", value: `${config.reply}${message.channel}`, inline: false})
-//         .addFields({name: "Author", value: `${config.reply}${message.author} - ${message.author.tag}`, inline: false})
-//         //.addFields({name: "Deleted By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
-//         .setTimestamp()
-//         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-//         .setFooter({ text: `YourForums Logging System`})
-
-//     return send_log(embed);
-// })
-
 client.on(Events.MessageDelete, async (msg) => {
-    let logs = await msg.guild.fetchAuditLogs({type: 72});
-    let entry = logs.entries.first();
+    //let logs = await msg.guild.fetchAuditLogs({type: 72});
+    //let entry = logs.entries.first();
 
     const channelID = config.logChannel
     const logChan = await client.channels.fetch(channelID)
 
-    if(msg.author.bot) return;
+   //if(msg.author.bot) return;
 
     logChan.send({ embeds: [new EmbedBuilder()
         .setColor(config.embedColor)
@@ -390,7 +362,7 @@ client.on(Events.MessageDelete, async (msg) => {
         .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
         .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
         .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
-        .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+        //.addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
         .setTimestamp()
         .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
         .setFooter({ text: `YourForums Logging System`})]})
