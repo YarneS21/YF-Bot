@@ -4,8 +4,8 @@ const logSchema = require("../../Schemas.js/logSchema"); // If necessary, update
  
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("audit-log") // Update this to your preference.
-        .setDescription("Configure your logging system to receive audit logs.")
+        .setName('audit-log') // Update this to your preference.
+        .setDescription('Configure your logging system to receive audit logs.')
         .setDMPermission(false)
         .addChannelOption(option => 
             option
