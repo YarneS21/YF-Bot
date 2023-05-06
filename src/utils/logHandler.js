@@ -22,26 +22,7 @@ function logHandler(client) {
       console.log(err);
     }
   }
- 
-    // Message Delete Log
- 
-    client.on("messageDelete", function (message) {
-        try {
-        if (message.author.bot) return;
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Message Deleted')
-            .setColor('Red')
-            .setDescription(`
-            **Author**: <@${message.author.id}>\n**Date**: ${message.createdAt}\n**Channel**: <#${message.channel.id}>\n**Content**: ${message.content.replace(/`/g, "'")}`);
- 
-        return send_log(message.guild.id, embed);
-    } catch (err){
-        return console.log(err)
-    }
 
-    });
- 
     // Channel Topic Update Log
     
     client.on("guildChannelTopicUpdate", (channel, oldTopic, newTopic) => {
@@ -143,35 +124,7 @@ function logHandler(client) {
         return send_log(member.guild.id, embed);
  
     })
- 
-    // Member Joined Server
- 
-    client.on("guildMemberAdd", (member) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Member Joined')
-            .setColor('Green')
-            .setDescription(`${member.user} has joined **${member.guild.name}**!`,
-                member.user.displayAvatarURL({ dynamic: true }));
- 
-        return send_log(member.guild.id, embed);
- 
-    });
- 
-    // Member Left Server
- 
-    client.on("guildMemberRemove", (member) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Member Left')
-            .setColor('Red')
-            .setDescription(`${member.user} has left **${member.guild.name}**.`,
-                member.user.displayAvatarURL({ dynamic: true }));
- 
-        return send_log(member.guild.id, embed);
- 
-    });
- 
+
     // Server Boost Level Up
  
     client.on("guildBoostLevelUp", (guild, oldLevel, newLevel) => {
@@ -210,20 +163,7 @@ function logHandler(client) {
         return send_log(guild.id, embed);
  
     })
- 
-    // AFK Channel Add
- 
-    client.on("guildAfkChannelAdd", (guild, afkChannel) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Server Update')
-            .setColor('Green')
-            .setDescription(`**${guild.name}** has a new afk channel ${afkChannel}.`);
- 
-        return send_log(guild.id, embed);
- 
-    })
- 
+
     // Guild Vanity Add
  
     client.on("guildVanityURLAdd", (guild, vanityURL) => {
@@ -271,19 +211,6 @@ function logHandler(client) {
             .setTitle('Message Pinned')
             .setColor('Grey')
             .setDescription(`${message} has been pinned by ${message.author}.`);
- 
-        return send_log(message.guild.id, embed);
- 
-    })
- 
-    // Message Edit
- 
-    client.on("messageContentEdited", (message, oldContent, newContent) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Message Edited')
-            .setColor('Grey')
-            .setDescription(`**Previous**: ${oldContent}\n**New**: ${newContent}\n**Author**: ${message.author}`);
  
         return send_log(message.guild.id, embed);
  
@@ -341,150 +268,6 @@ function logHandler(client) {
  
     })
  
-    // Joined Voice Channel
- 
-    client.on("voiceChannelJoin", (member, channel) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** has joined ${channel}.`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Left Voice Channel
- 
-    client.on("voiceChannelLeave", (member, channel) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Red')
-            .setDescription(`**${member.user.tag}** has left ${channel}.`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Voice Channel Switch
- 
-    client.on("voiceChannelSwitch", (member, oldChannel, newChannel) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** has switched the voice channel.\n**Previous**: ${oldChannel}\n**New**: ${newChannel}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Voice Channel Mute
- 
-    client.on("voiceChannelMute", (member, muteType) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Red')
-            .setDescription(`**${member.user.tag}** has been muted.\n**Type**: ${muteType}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Voice Channel Unmute
- 
-    client.on("voiceChannelUnmute", (member, oldMuteType) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** has been unmuted.\n**Type**: ${oldMuteType}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Voice Channel Defean
- 
-    client.on("voiceChannelDeaf", (member, deafType) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Red')
-            .setDescription(`**${member.user.tag}** has been defeaned.\n**Type**: ${deafType}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // Voice Channel Undefean
- 
-    client.on("voiceChannelUndeaf", (member, deafType) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** has been undefeaned.\n**Type**: ${deafType}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // User Started to Stream
- 
-    client.on("voiceStreamingStart", (member, voiceChannel) => {
- 
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** has started to stream.\n**Channel**: ${voiceChannel}`);
- 
-        return send_log(member.guild.id, embed);
- 
-    })
- 
-    // User Stopped to Stream
- 
-    client.on("voiceStreamingStop", (member, voiceChannel) => {
- 
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Voice Channel')
-            .setColor('Red')
-            .setDescription(`**${member.user.tag}** has stopped the stream.\n**Channel**: ${voiceChannel}`);
- 
-        return send_log(member.guild.id, embed);
-    });
- 
-    // Member Became Offline
- 
-    client.on("guildMemberOffline", (member, oldStatus) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Member Offline')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** went offline.`);
- 
-        return send_log(member.guild.id, embed);
- 
-    });
- 
-    // Member Became Online
- 
-    client.on("guildMemberOnline", (member, newStatus) => {
- 
-        const embed = new EmbedBuilder()
-            .setTitle('Member Online')
-            .setColor('Green')
-            .setDescription(`**${member.user.tag}** is now online.`);
- 
-        return send_log(member.guild.id, embed);
- 
-    });
- 
     // Role Create
  
     client.on("roleCreate", async (role) => {
@@ -498,7 +281,7 @@ function logHandler(client) {
  
         return send_log(role.guild.id, embed);
       });
- 
+
  
     // Role Delete
  
@@ -513,78 +296,6 @@ function logHandler(client) {
  
         return send_log(role.guild.id, embed);
       });
- 
- 
-    // User Ban
- 
-    client.on("guildBanAdd", async ({ guild, user }) => {
-        const logs = await guild.fetchAuditLogs({ limit: 1, type: 22 });
-        const log = logs.entries.first();
- 
-        const embed = new EmbedBuilder()
-          .setTitle('Member Banned')
-          .setColor('Red')
-          .setDescription(`${user}/${user.id} was banned by <@${log.executor.id}>.`);
- 
-        return send_log(guild.id, embed);
-      });
- 
- 
-    // User Unban
- 
-    client.on("guildBanRemove", async ({ guild, user }) => {
-        const logs = await guild.fetchAuditLogs({ limit: 1, type: 22 });
-        const log = logs.entries.first();
-        const executor = log.executor;
-        const embed = new EmbedBuilder()
-          .setTitle('Member Unbanned')
-          .setColor('Green')
-          .setDescription(`${user}/${user.id} was unbanned by <@${executor.id}>.`);
- 
-        return send_log(guild.id, embed);
-      });      
- 
-    // Channel Create
- 
-    client.on("channelCreate", async (channel) => {
-        const auditLogs = await channel.guild.fetchAuditLogs({
-          limit: 1,
-          type: 10 
-        });
- 
-        const entry = auditLogs.entries.first();
-        if (!entry) return;
- 
-        const user = entry.executor;
- 
-        const embed = new EmbedBuilder()
-          .setTitle('Channel Created')
-          .setColor('Green')
-          .setDescription(`${channel.name} has been created by ${user}.`);
- 
-        return send_log(channel.guild.id, embed);
-    });
- 
-    // Channel Delete
- 
-    client.on("channelDelete", async (channel) => {
-        const auditLogs = await channel.guild.fetchAuditLogs({
-          limit: 1,
-          type: 12
-        });
- 
-        const entry = auditLogs.entries.first();
-        if (!entry) return;
- 
-        const user = entry.executor;
- 
-        const embed = new EmbedBuilder()
-          .setTitle('Channel Deleted')
-          .setColor('Red')
-          .setDescription(`${channel.name} has been deleted by ${user}.`);
- 
-        return send_log(channel.guild.id, embed);
-    });
-}
+    }
  
 module.exports = { logHandler };
