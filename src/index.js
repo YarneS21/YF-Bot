@@ -454,7 +454,6 @@ client.on(Events.MessageReactionRemove, async (reaction, member) => {
 
 const capschema = require('./Schemas.js/verify');
 const verifyusers = require('./Schemas.js/verifyusers');
-const { logHandler } = require('./functions/logHandler');
 
 client.on(Events.InteractionCreate, async interaction => {
 
