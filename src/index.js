@@ -83,7 +83,6 @@ client.on("ready", () => {
 // Sticky Message Code //
 
 const stickyschema = require('./Schemas.js/sticky');
-const sticky = require('./commands/Moderation/sticky');
 
 client.on(Events.MessageCreate, async message => {
     if (message.author.bot) return;

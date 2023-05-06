@@ -1,10 +1,10 @@
 const { SlashCommandBuilder, PermissionsBitField, EmbedBuilder, ChannelType } = require("discord.js");
  
-const logSchema = require("../../Schemas.js/logSchema"); // If necessary, update this to your schema file name.
+const logSchema = require("../../Schemas.js/logSchema");
  
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('audit-log') // Update this to your preference.
+        .setName('log-setup') 
         .setDescription('Configure your logging system to receive audit logs.')
         .setDMPermission(false)
         .addChannelOption(option => 
