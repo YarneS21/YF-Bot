@@ -59,7 +59,7 @@ module.exports = {
                         .setTimestamp();
                 }
      
-                return interaction.reply({ embeds: [embed], ephemeral: true });
+                return interaction.reply({ embeds: [embed] });
             });
 
         break
@@ -79,18 +79,18 @@ module.exports = {
                     data.Channel = welcomeChannel.id;
                     await data.save();
     
-                    embed.setDescription(`Successfully updated the log channel to ${welcomeChannel}.`)
+                    embed.setDescription(`Successfully updated the welcome channel to ${welcomeChannel}.`)
                         .setColor("Green")
                         .setTimestamp();
                 }
     
                 if (err) {
-                    embed.setDescription("An error occurred while trying to update the audit log channel.")
+                    embed.setDescription("An error occurred while trying to update the welcome channel.")
                         .setColor("Red")
                         .setTimestamp();
                 }
     
-                return interaction.reply({ embeds: [embed], ephemeral: true });
+                return interaction.reply({ embeds: [embed] });
             });            
         }
     }
