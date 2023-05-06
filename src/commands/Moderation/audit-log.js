@@ -33,7 +33,7 @@ module.exports = {
         const embed = new EmbedBuilder();
         
         switch (sub) {
-        case 'logchannel':
+        case 'logs':
             logSchema.findOne({ Guild: guildId }, async (err, data) => {
                 if (!data) {
                     await logSchema.create({
@@ -61,9 +61,9 @@ module.exports = {
      
                 return interaction.reply({ embeds: [embed] });
             });
-
-        break
-        case 'welcomechannel':
+            
+        break;
+        case 'welcome':
 
             welcomeSchema.findOne({ Guild: guildId }, async (err, data) => {
                 if (!data) {
