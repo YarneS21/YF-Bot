@@ -29,6 +29,7 @@ const warningSchema = require('./Schemas.js/warn');
 const { CaptchaGenerator } = require('captcha-canvas');
 const reactschema = require('./Schemas.js/reactionroles');
 const roleschema = require('./Schemas.js/autorole');
+const logSchema = require("../Schemas.js/logSchema");
 
 client.commands = new Collection();
 
@@ -248,7 +249,8 @@ client.on(Events.ChannelCreate, async channel => {
         if (type == 5) type = 'Announcement'
         if (type == 4) type = 'Category'
 
-        const channelID = config.logChannel
+        const data = await logSchema.findOne({ Guild: guildId });
+        const channelID = client.channels.cache.get(data.Channel);
         const logChan = await client.channels.fetch(channelID)
 
         logChan.send({ embeds: [new EmbedBuilder()
@@ -281,7 +283,8 @@ client.on(Events.ChannelDelete, async channel => {
         if (type == 5) type = 'Announcement'
         if (type == 4) type = 'Category'
 
-        const channelID = config.logChannel
+        const data = await logSchema.findOne({ Guild: guildId });
+        const channelID = client.channels.cache.get(data.Channel);
         const logChan = await client.channels.fetch(channelID)
 
         logChan.send({ embeds: [new EmbedBuilder()
@@ -306,7 +309,8 @@ client.on(Events.GuildBanAdd, async member => {
         const name = member.user.tag
         const id = member.user.id
 
-        const channelID = config.logChannel
+        const data = await logSchema.findOne({ Guild: guildId });
+        const channelID = client.channels.cache.get(data.Channel);
         const logChan = await client.channels.fetch(channelID)
 
         logChan.send({ embeds: [new EmbedBuilder()
@@ -332,7 +336,8 @@ client.on(Events.GuildBanRemove, async member => {
         const name = member.user.tag
         const id = member.user.id
 
-        const channelID = config.logChannel
+        const data = await logSchema.findOne({ Guild: guildId });
+        const channelID = client.channels.cache.get(data.Channel);
         const logChan = await client.channels.fetch(channelID)
 
         logChan.send({ embeds: [new EmbedBuilder()
@@ -353,7 +358,8 @@ client.on(Events.MessageDelete, async (msg) => {
     let logs = await msg.guild.fetchAuditLogs({type: 72});
     let entry = logs.entries.first();
 
-    const channelID = config.logChannel
+    const data = await logSchema.findOne({ Guild: guildId });
+    const channelID = client.channels.cache.get(data.Channel);
     const logChan = await client.channels.fetch(channelID)
 
    try {
@@ -378,8 +384,8 @@ client.on(Events.MessageUpdate, async (message, newMessage) => {
         const mes = message.content
 
         if(!mes) return
-
-        const channelID = config.logChannel
+        const data = await logSchema.findOne({ Guild: guildId });
+        const channelID = client.channels.cache.get(data.Channel);
         const logChan = await client.channels.fetch(channelID)
 
         logChan.send({ embeds: [new EmbedBuilder()
