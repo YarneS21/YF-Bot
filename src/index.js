@@ -59,8 +59,6 @@ client.giveawayManager = new GiveawaysManager(client, {
 
 // Commands //
 
-const { logHandler } = require("./functions/logHandler");
-
 (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
@@ -68,7 +66,6 @@ const { logHandler } = require("./functions/logHandler");
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandFolders, "./src/commands");
     client.login(process.env.token);
-    logHandler(client);
 })();
 
 // Status //
