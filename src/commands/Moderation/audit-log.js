@@ -1,8 +1,4 @@
-const { 
-    SlashCommandBuilder, 
-    PermissionFlagsBits, 
-    EmbedBuilder 
-} = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
  
 const logSchema = require("../../Schemas.js/logSchema"); // If necessary, update this to your schema file name.
  
@@ -10,7 +6,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("audit-log") // Update this to your preference.
         .setDescription("Configure your logging system to receive audit logs.")
-        .setDefaultMemberPermissions(PermissionFlagsBits.ViewChannel)
         .addChannelOption(option =>
             option.setName("channel")
                 .setDescription("Channel.")
@@ -18,6 +13,10 @@ module.exports = {
         ),
  
     async execute(interaction) {
+
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+
+
         const { channel, guildId, options } = interaction;
  
         const logChannel = options.getChannel("channel") || channel;
