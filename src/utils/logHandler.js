@@ -26,6 +26,7 @@ function logHandler(client) {
     // Message Delete Log
  
     client.on("messageDelete", function (message) {
+        try {
         if (message.author.bot) return;
  
         const embed = new EmbedBuilder()
@@ -35,10 +36,14 @@ function logHandler(client) {
             **Author**: <@${message.author.id}>\n**Date**: ${message.createdAt}\n**Channel**: <#${message.channel.id}>\n**Content**: ${message.content.replace(/`/g, "'")}`);
  
         return send_log(message.guild.id, embed);
+    } catch (err){
+        return console.log(err)
+    }
+
     });
  
     // Channel Topic Update Log
- 
+    
     client.on("guildChannelTopicUpdate", (channel, oldTopic, newTopic) => {
  
         const embed = new EmbedBuilder()
