@@ -397,11 +397,9 @@ client.on(Events.MessageUpdate, async (message, newMessage) => {
 // Welcome Message //
 
 client.on(Events.GuildMemberAdd, async (member, err) => {
-        const data = await welcomeSchema.findOne({ Guild: guildId });
 
-        const welcomeChannel = client.channels.cache.get(data.Channel);
-
-        const channelwelcome = member.guild.channels.cache.get(welcomeChannel)
+        const channelID = config.welcomeChannel;
+        const channelwelcome = member.guild.channels.cache.get(channelID)
 
         const roledata = await roleschema.findOne({ Guild: member.guild.id });
 
@@ -437,7 +435,7 @@ client.on(Events.GuildMemberAdd, async (member, err) => {
 // MEMBER LEAVE
 
 client.on(Events.GuildMemberRemove, async (member, err) => {
-        const data = await welcomeSchema.findOne({ Guild: guildId });
+        const data = await logSchema.findOne({ Guild: guildId });
 
         const welcomeChannel = client.channels.cache.get(data.Channel);
 
