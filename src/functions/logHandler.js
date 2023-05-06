@@ -5,7 +5,7 @@ const {
 function logHandler(client) {
  
   // Import Log Schema  
-  const logSchema = require("../Schema/logSchema");
+  const logSchema = require("../Schemas.js/logSchema");
  
   async function send_log(guildId, embed) {
     try {
