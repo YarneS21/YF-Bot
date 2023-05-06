@@ -232,223 +232,223 @@ client.on(Events.MessageReactionRemove, async (reaction, member) => {
 })
 
 //MOD LOGS
-client.on(Events.ChannelCreate, async channel => {
-    channel.guild.fetchAuditLogs({
-        type: AuditLogEvent.ChannelCreate,
-    })
-    .then(async audit =>{
-        const {executor} = audit.entries.first()
-        const name = channel.name
-        const id = channel.id
-        let type = channel.type
+// client.on(Events.ChannelCreate, async channel => {
+//     channel.guild.fetchAuditLogs({
+//         type: AuditLogEvent.ChannelCreate,
+//     })
+//     .then(async audit =>{
+//         const {executor} = audit.entries.first()
+//         const name = channel.name
+//         const id = channel.id
+//         let type = channel.type
 
-        if (type == 0) type = 'Text'
-        if (type == 2) type = 'Voice'
-        if (type == 13) type = 'Stage'
-        if (type == 15) type = 'Forum'
-        if (type == 5) type = 'Announcement'
-        if (type == 4) type = 'Category'
+//         if (type == 0) type = 'Text'
+//         if (type == 2) type = 'Voice'
+//         if (type == 13) type = 'Stage'
+//         if (type == 15) type = 'Forum'
+//         if (type == 5) type = 'Announcement'
+//         if (type == 4) type = 'Category'
 
-        const channelID = config.logChannel
-        const logChan = await client.channels.fetch(channelID)
+//         const channelID = config.logChannel
+//         const logChan = await client.channels.fetch(channelID)
 
-        logChan.send({ embeds: [new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle(":new: Channel Created")
-            .addFields({name: "Channel Name", value: `${name} (<#${id}>)`, inline: false})
-            .addFields({name: "Channel Type", value: `${type}`, inline: false})
-            .addFields({name: "Channel ID", value: `${id}`, inline: false})
-            .addFields({name: "Channel By", value: `${executor} - ${executor.tag}`, inline: false})
-            .setTimestamp()
-            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-            .setFooter({ text: `YourForums Logging System`})]})
-    })
-})
+//         logChan.send({ embeds: [new EmbedBuilder()
+//             .setColor(config.embedColor)
+//             .setTitle(":new: Channel Created")
+//             .addFields({name: "Channel Name", value: `${name} (<#${id}>)`, inline: false})
+//             .addFields({name: "Channel Type", value: `${type}`, inline: false})
+//             .addFields({name: "Channel ID", value: `${id}`, inline: false})
+//             .addFields({name: "Channel By", value: `${executor} - ${executor.tag}`, inline: false})
+//             .setTimestamp()
+//             .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+//             .setFooter({ text: `YourForums Logging System`})]})
+//     })
+// })
 
-client.on(Events.ChannelDelete, async channel => {
-    channel.guild.fetchAuditLogs({
-        type: AuditLogEvent.ChannelDelete,
-    })
-    .then(async audit =>{
-        const {executor} = audit.entries.first()
-        const name = channel.name
-        const id = channel.id
-        let type = channel.type
+// client.on(Events.ChannelDelete, async channel => {
+//     channel.guild.fetchAuditLogs({
+//         type: AuditLogEvent.ChannelDelete,
+//     })
+//     .then(async audit =>{
+//         const {executor} = audit.entries.first()
+//         const name = channel.name
+//         const id = channel.id
+//         let type = channel.type
 
-        if (type == 0) type = 'Text'
-        if (type == 2) type = 'Voice'
-        if (type == 13) type = 'Stage'
-        if (type == 15) type = 'Forum'
-        if (type == 5) type = 'Announcement'
-        if (type == 4) type = 'Category'
+//         if (type == 0) type = 'Text'
+//         if (type == 2) type = 'Voice'
+//         if (type == 13) type = 'Stage'
+//         if (type == 15) type = 'Forum'
+//         if (type == 5) type = 'Announcement'
+//         if (type == 4) type = 'Category'
 
-        const channelID = config.logChannel
-        const logChan = await client.channels.fetch(channelID)
+//         const channelID = config.logChannel
+//         const logChan = await client.channels.fetch(channelID)
 
-        logChan.send({ embeds: [new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle(":put_litter_in_its_place: Channel Deleted")
-            .addFields({name: "Channel Name", value: `${name}`, inline: false})
-            .addFields({name: "Channel Type", value: `${type}`, inline: false})
-            .addFields({name: "Channel ID", value: `${id}`, inline: false})
-            .addFields({name: "Channel By", value: `${executor} - ${executor.tag}`, inline: false})
-            .setTimestamp()
-            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-            .setFooter({ text: `YourForums Logging System`})]})
-    })
-})
+//         logChan.send({ embeds: [new EmbedBuilder()
+//             .setColor(config.embedColor)
+//             .setTitle(":put_litter_in_its_place: Channel Deleted")
+//             .addFields({name: "Channel Name", value: `${name}`, inline: false})
+//             .addFields({name: "Channel Type", value: `${type}`, inline: false})
+//             .addFields({name: "Channel ID", value: `${id}`, inline: false})
+//             .addFields({name: "Channel By", value: `${executor} - ${executor.tag}`, inline: false})
+//             .setTimestamp()
+//             .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+//             .setFooter({ text: `YourForums Logging System`})]})
+//     })
+// })
 
-client.on(Events.GuildBanAdd, async member => {
-    member.guild.fetchAuditLogs({
-        type: AuditLogEvent.GuildBanAdd,
-    })
-    .then(async audit =>{
-        const {executor} = audit.entries.first()
-        const name = member.user.tag
-        const id = member.user.id
+// client.on(Events.GuildBanAdd, async member => {
+//     member.guild.fetchAuditLogs({
+//         type: AuditLogEvent.GuildBanAdd,
+//     })
+//     .then(async audit =>{
+//         const {executor} = audit.entries.first()
+//         const name = member.user.tag
+//         const id = member.user.id
 
-        const channelID = config.logChannel
-        const logChan = await client.channels.fetch(channelID)
+//         const channelID = config.logChannel
+//         const logChan = await client.channels.fetch(channelID)
 
-        logChan.send({ embeds: [new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle(":hammer: Member Banned")
-            .addFields({name: "Member Name", value: `${config.reply}${name}`, inline: false})
-            .addFields({name: "Member ID", value: `${config.reply}${id}`, inline: false})
-            .addFields({name: "Banned By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
-            .setTimestamp()
-            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-            .setFooter({ text: `YourForums Logging System`})]})
-    })
-})
+//         logChan.send({ embeds: [new EmbedBuilder()
+//             .setColor(config.embedColor)
+//             .setTitle(":hammer: Member Banned")
+//             .addFields({name: "Member Name", value: `${config.reply}${name}`, inline: false})
+//             .addFields({name: "Member ID", value: `${config.reply}${id}`, inline: false})
+//             .addFields({name: "Banned By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
+//             .setTimestamp()
+//             .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+//             .setFooter({ text: `YourForums Logging System`})]})
+//     })
+// })
 
-//UNBANS
+// //UNBANS
 
-client.on(Events.GuildBanRemove, async member => {
-    member.guild.fetchAuditLogs({
-        type: AuditLogEvent.GuildBanRemove,
-    })
-    .then(async audit =>{
-        const {executor} = audit.entries.first()
-        const name = member.user.tag
-        const id = member.user.id
+// client.on(Events.GuildBanRemove, async member => {
+//     member.guild.fetchAuditLogs({
+//         type: AuditLogEvent.GuildBanRemove,
+//     })
+//     .then(async audit =>{
+//         const {executor} = audit.entries.first()
+//         const name = member.user.tag
+//         const id = member.user.id
 
-        const channelID = config.logChannel
-        const logChan = await client.channels.fetch(channelID)
+//         const channelID = config.logChannel
+//         const logChan = await client.channels.fetch(channelID)
 
-        logChan.send({ embeds: [new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle(":hammer: Member Unbanned")
-            .addFields({name: "Member Name", value: `${config.reply}${name}`, inline: false})
-            .addFields({name: "Member ID", value: `${config.reply}${id}`, inline: false})
-            .addFields({name: "Unbanned By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
-            .setTimestamp()
-            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-            .setFooter({ text: `YourForums Logging System`})]})
-    })
-})
+//         logChan.send({ embeds: [new EmbedBuilder()
+//             .setColor(config.embedColor)
+//             .setTitle(":hammer: Member Unbanned")
+//             .addFields({name: "Member Name", value: `${config.reply}${name}`, inline: false})
+//             .addFields({name: "Member ID", value: `${config.reply}${id}`, inline: false})
+//             .addFields({name: "Unbanned By", value: `${config.reply}${executor} - ${executor.tag}`, inline: false})
+//             .setTimestamp()
+//             .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+//             .setFooter({ text: `YourForums Logging System`})]})
+//     })
+// })
 
-//MESSAGE DELETE
+// //MESSAGE DELETE
 
-client.on(Events.MessageDelete, async (msg) => {
-    let logs = await msg.guild.fetchAuditLogs({type: 72});
-    let entry = logs.entries.first();
+// client.on(Events.MessageDelete, async (msg) => {
+//     let logs = await msg.guild.fetchAuditLogs({type: 72});
+//     let entry = logs.entries.first();
 
-    const channelID = config.logChannel
-    const logChan = await client.channels.fetch(channelID)
+//     const channelID = config.logChannel
+//     const logChan = await client.channels.fetch(channelID)
 
-   try {
-    logChan.send({ embeds: [new EmbedBuilder()
-        .setColor(config.embedColor)
-        .setTitle(":fire: Message Deleted")
-        .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
-        .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
-        .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
-        .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
-        .setTimestamp()
-        .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
-        .setFooter({ text: `YourForums Logging System`})]})
-    } catch (err) {
-        return console.log(err);
-    }
-})
+//    try {
+//     logChan.send({ embeds: [new EmbedBuilder()
+//         .setColor(config.embedColor)
+//         .setTitle(":fire: Message Deleted")
+//         .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
+//         .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
+//         .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
+//         .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+//         .setTimestamp()
+//         .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
+//         .setFooter({ text: `YourForums Logging System`})]})
+//     } catch (err) {
+//         return console.log(err);
+//     }
+// })
 
-//MESSAGE EDIT
+// //MESSAGE EDIT
 
-client.on(Events.MessageUpdate, async (message, newMessage) => {
-        const mes = message.content
+// client.on(Events.MessageUpdate, async (message, newMessage) => {
+//         const mes = message.content
 
-        if(!mes) return
+//         if(!mes) return
 
-        const channelID = config.logChannel
-        const logChan = await client.channels.fetch(channelID)
+//         const channelID = config.logChannel
+//         const logChan = await client.channels.fetch(channelID)
 
-        logChan.send({ embeds: [new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setTitle(":wrench: Message Edited")
-            .addFields({name: "Old Message", value: `${config.reply}${mes}`, inline: false})
-            .addFields({name: "New Message", value: `${config.reply}${newMessage}`, inline: false})
-            .addFields({name: "Message Channel", value: `${config.reply}${message.channel}`, inline: false})
-            .addFields({name: "Edited By", value: `${config.reply}${message.author} - ${message.author.tag}`, inline: false})
-            .setTimestamp()
-            .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
-            .setFooter({ text: `YourForums Logging System`})]})
-})
+//         logChan.send({ embeds: [new EmbedBuilder()
+//             .setColor(config.embedColor)
+//             .setTitle(":wrench: Message Edited")
+//             .addFields({name: "Old Message", value: `${config.reply}${mes}`, inline: false})
+//             .addFields({name: "New Message", value: `${config.reply}${newMessage}`, inline: false})
+//             .addFields({name: "Message Channel", value: `${config.reply}${message.channel}`, inline: false})
+//             .addFields({name: "Edited By", value: `${config.reply}${message.author} - ${message.author.tag}`, inline: false})
+//             .setTimestamp()
+//             .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+//             .setFooter({ text: `YourForums Logging System`})]})
+// })
 
-// Welcome Message //
+// // Welcome Message //
 
-client.on(Events.GuildMemberAdd, async (member, err) => {
+// client.on(Events.GuildMemberAdd, async (member, err) => {
 
-        const channelID = config.welcomeChannel;
-        const channelwelcome = member.guild.channels.cache.get(channelID)
+//         const channelID = config.welcomeChannel;
+//         const channelwelcome = member.guild.channels.cache.get(channelID)
 
-        const roledata = await roleschema.findOne({ Guild: member.guild.id });
+//         const roledata = await roleschema.findOne({ Guild: member.guild.id });
 
-        if (roledata) {
-            const giverole = await member.guild.roles.cache.get(roledata.Role)
+//         if (roledata) {
+//             const giverole = await member.guild.roles.cache.get(roledata.Role)
 
-            member.roles.add(giverole).catch(err => {
-                console.log('Error received trying to give an auto role!');
-            })
-        }
+//             member.roles.add(giverole).catch(err => {
+//                 console.log('Error received trying to give an auto role!');
+//             })
+//         }
         
-        const embedwelcome = new EmbedBuilder()
-        .setColor(config.embedColor)
-         .setTitle(`👋 Welcome to the Server!`)
-         .setDescription( `${config.replyc}**Welcome ${member} to the Server!**\n${config.reply}👋 Get cozy and enjoy :)`)
-         .setFooter({ text: `Welcome to YourForums!`})
-         .setTimestamp()
-         .setThumbnail(member.displayAvatarURL({dynamic: true}))  
+//         const embedwelcome = new EmbedBuilder()
+//         .setColor(config.embedColor)
+//          .setTitle(`👋 Welcome to the Server!`)
+//          .setDescription( `${config.replyc}**Welcome ${member} to the Server!**\n${config.reply}👋 Get cozy and enjoy :)`)
+//          .setFooter({ text: `Welcome to YourForums!`})
+//          .setTimestamp()
+//          .setThumbnail(member.displayAvatarURL({dynamic: true}))  
 
-        const embedwelcomedm = new EmbedBuilder()
-         .setColor(config.embedColor)
-         .setTitle('👋 Welcome to the Server!')
-         .setDescription( `${config.replyc}**Welcome ${member} to the Server!**\n${config.reply}👋 Get cozy and enjoy :)`)
-         .setFooter({ text: `Welcome to YourForums!`})
-         .setTimestamp()
-         .setThumbnail(member.displayAvatarURL({dynamic: true}))  
+//         const embedwelcomedm = new EmbedBuilder()
+//          .setColor(config.embedColor)
+//          .setTitle('👋 Welcome to the Server!')
+//          .setDescription( `${config.replyc}**Welcome ${member} to the Server!**\n${config.reply}👋 Get cozy and enjoy :)`)
+//          .setFooter({ text: `Welcome to YourForums!`})
+//          .setTimestamp()
+//          .setThumbnail(member.displayAvatarURL({dynamic: true}))  
          
-        await channelwelcome.send({ embeds: [embedwelcome]});
-        member.send({ embeds: [embedwelcomedm]}).catch(err => console.log(`Welcome DM error: ${err}`))
+//         await channelwelcome.send({ embeds: [embedwelcome]});
+//         member.send({ embeds: [embedwelcomedm]}).catch(err => console.log(`Welcome DM error: ${err}`))
     
-})
+// })
 
-// MEMBER LEAVE
+// // MEMBER LEAVE
 
-client.on(Events.GuildMemberRemove, async (member, err) => {
-        const channelID = config.welcomeChannel;
-        const channelwelcome = member.guild.channels.cache.get(channelID);
+// client.on(Events.GuildMemberRemove, async (member, err) => {
+//         const channelID = config.welcomeChannel;
+//         const channelwelcome = member.guild.channels.cache.get(channelID);
 
-        const embedleave = new EmbedBuilder()
-        .setColor(config.embedColor)
-        .setTitle(`👋 Member Left`)
-        .setDescription( `${config.replyc}**${member} has left the Server**\n${config.reply}👋 Cast your goobyes`)
-        .setFooter({ text: `We hope to see you back soon!`})
-        .setTimestamp()
-        .setThumbnail(member.displayAvatarURL({dynamic: true}))
+//         const embedleave = new EmbedBuilder()
+//         .setColor(config.embedColor)
+//         .setTitle(`👋 Member Left`)
+//         .setDescription( `${config.replyc}**${member} has left the Server**\n${config.reply}👋 Cast your goobyes`)
+//         .setFooter({ text: `We hope to see you back soon!`})
+//         .setTimestamp()
+//         .setThumbnail(member.displayAvatarURL({dynamic: true}))
 
-        await channelwelcome.send({ embeds: [embedleave]}).catch(err);
-})
+//         await channelwelcome.send({ embeds: [embedleave]}).catch(err);
+// })
 
 // Verification //
 
