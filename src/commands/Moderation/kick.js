@@ -16,37 +16,36 @@ module.exports = {
         const ID = users.id;
         const kickedmember = interaction.options.getMember('user');
         const KickPerms = perms.KickPerms
+        const reason = interaction.options.getString('reason') || 'No reason provided :(';
+
+        const dmembed = new EmbedBuilder()
+        .setAuthor({ name: '🔨 Kick Tool'})
+        .setTitle(`${config.reply}You were kicked from "${interaction.guild.name}"`)
+        .addFields({ name: '• Server', value: `${config.reply} ${interaction.guild.name}`})
+        .addFields({ name: '• Reason', value: `${config.reply} ${reason}`})
+        .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
+        .setFooter({ text: '🔨 Kicked from a server'})
+        .setTimestamp()
+        .setThumbnail(config.picture)
+        .setColor(config.embedColor)
+
+        const embed = new EmbedBuilder()
+        .setColor(config.embedColor)
+        .setAuthor({ name: '🔨 Kick Tool'})
+        .setTitle(`${config.reply}User was kicked!`)
+        .addFields({ name: '• User', value: `${config.reply} ${users.tag}`})
+        .addFields({ name: '• Reason', value: `${config.reply} ${reason}`})
+        .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
+        .setThumbnail(config.picture)
+        .setFooter({ text: '🔨 Someone got kicked hard'})
+        .setColor(config.embedColor)
+        .setTimestamp()
 
         if (interaction.member.roles.cache.some(role => KickPerms.includes(role.id))) {
             if (interaction.member.id === ID) {
                 interaction.reply({ content: 'You **cannot** use the kick power on you, silly goose..', ephemeral: true});
             } else {
                 if (kickedmember) {
-                    const reason = interaction.options.getString('reason') || 'No reason provided :(';
-        
-                    const dmembed = new EmbedBuilder()
-                    .setAuthor({ name: '🔨 Kick Tool'})
-                    .setTitle(`${config.reply}You were kicked from "${interaction.guild.name}"`)
-                    .addFields({ name: '• Server', value: `${config.reply} ${interaction.guild.name}`})
-                    .addFields({ name: '• Reason', value: `${config.reply} ${reason}`})
-                    .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
-                    .setFooter({ text: '🔨 Kicked from a server'})
-                    .setTimestamp()
-                    .setThumbnail(config.picture)
-                    .setColor(config.embedColor)
-            
-                    const embed = new EmbedBuilder()
-                    .setColor(config.embedColor)
-                    .setAuthor({ name: '🔨 Kick Tool'})
-                    .setTitle(`${config.reply}User was kicked!`)
-                    .addFields({ name: '• User', value: `${config.reply} ${users.tag}`})
-                    .addFields({ name: '• Reason', value: `${config.reply} ${reason}`})
-                    .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
-                    .setThumbnail(config.picture)
-                    .setFooter({ text: '🔨 Someone got kicked hard'})
-                    .setColor(config.embedColor)
-                    .setTimestamp()
-            
                     await kickedmember.kick().catch(err => {
                         return interaction.reply({ content: `**Couldn't** kick this member! Check my **role position** and try again.`, ephemeral: true});
                     })
@@ -57,7 +56,6 @@ module.exports = {
             
                     await logChan.send({embeds: [embed]})
                     await interaction.reply({ embeds: [embed] });
-                    
                 } else {
                     interaction.reply({ content: `That user **does not** exist within your server.`, ephemeral: true});
                 }
