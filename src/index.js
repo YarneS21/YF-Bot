@@ -116,13 +116,15 @@ client.on(Events.MessageCreate, async message => {
 
     if (message.channel.id == config.suggestionChannel) {
         message.delete()
-        let suggestionChannel = config.suggestionChannel
-        let embed = new EmbedBuilder()
-        .setTitle(`${message.author.tag}`)
-        .setDescription(`${message.content.replace(/`/g,"'")}`)
-        .setThumbnail(message.author.displayAvatarURL())
+        const suggestionChannel = config.suggestionChannel
 
-        let newMessage = suggestionChannel.send({embeds: [embed]})
+        let newMessage = suggestionChannel.send({embeds: [
+            new EmbedBuilder()
+            .setColor(config.embedColor)
+            .setTitle(`${message.author.tag}`)
+            .setDescription(`${message.content.replace(/`/g,"'")}`)
+            .setThumbnail(message.author.displayAvatarURL())]
+        })
         newMessage.react("<:tick:1040008503617671261>")
         newMessage.react("<:cross:1040008993457836174>")
     }
