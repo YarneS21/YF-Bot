@@ -448,7 +448,7 @@ client.on(Events.GuildMemberAdd, async (member, err) => {
 })
 
 // MEMBER LEAVE
-
+const logSchema = require('./Schemas.js/logSchema')
 client.on(Events.GuildMemberRemove, async (member, err) => {
         const data = await logSchema.findOne({ Guild: guildId });
 
