@@ -1,7 +1,7 @@
 module.exports = {
-    BanPerms: ["", ""],  // ROLE ID
+    BanPerms: ["1103726419479122011", ""],  // ROLE ID
     UnbanPerms: ["", ""],
-    KickPerms: ["1103726419479122011", ""],
+    KickPerms: ["", ""],
     WarnPerms: ["", ""],
     RemoveWarnPerms: ["", ""],
     StickyMessagePerms: ["", ""],
