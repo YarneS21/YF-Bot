@@ -55,7 +55,7 @@ module.exports = {
         })
         const channelID = config.logChannel
         const logChan = await client.channels.fetch(channelID)
-        await logChan.send(embeds [embed])
+        await logChan.send({embeds: [embed]})
         await interaction.reply({ embeds: [embed] });
     }
 }
