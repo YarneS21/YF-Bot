@@ -375,7 +375,7 @@ client.on(Events.MessageDelete, async (msg) => {
             .setTitle(":fire: Message Deleted")
             .addFields({name: "Message Content", value: `*Not Fetchable*`, inline: false})
             .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
-            .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
+            .addFields({name: "Author", value: `*Not Fetchable*`, inline: false})
             .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
             .setTimestamp()
             .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
@@ -383,7 +383,8 @@ client.on(Events.MessageDelete, async (msg) => {
     }
 
     } catch (err) {
-        return console.log(err);
+        console.log(err);
+        return console.log('This is a normal error dont worry about it mate')
     }
 })
 
