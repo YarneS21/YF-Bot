@@ -8,5 +8,5 @@ module.exports = {
     reply: "<:reply:1102276890946973867>",
     replyc: "<:replycont:1102276889843871874>",
     welcomeChannel: "1103726381164150864",
-    twitterChannel: "1103726381164150864"
+    suggestionChannel: "1081213827800113222",
 }

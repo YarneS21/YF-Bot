@@ -26,19 +26,18 @@ module.exports = {
                 .setRequired(false)
                 .addChannelTypes(ChannelType.GuildText)
         )
-        .setDMPermission(false) // Prevents the command from being executable in bot DMs.
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels), // Edit this permission to your liking.
+        .setDMPermission(false) 
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels), 
     async execute(interaction) {
         const { options, channel } = interaction;
 
-        // Required options:
+        
         const question = options.getString("question");
         const choiceOne = options.getString("choice-1");
         const choiceTwo = options.getString("choice-2");
-        const Channel = options.getChannel("channel") || channel; // If channel option provided, send poll therel. Otherwise send poll in the channel of interaction.
+        const Channel = options.getChannel("channel") || channel; 
 
         try {
-            // Send the poll embed.
             const message = await Channel.send({
                 embeds: [
                     new EmbedBuilder()
@@ -57,11 +56,11 @@ module.exports = {
                 ]
             })
 
-            // Add the number reactions to the poll embed.
+            
             await message.react("1️⃣");
             await message.react("2️⃣");
 
-            // Send the success embed.
+            
             await interaction.reply({
                 embeds: [
                     new EmbedBuilder()
@@ -77,7 +76,7 @@ module.exports = {
                 ],
                 ephemeral: true
             })
-        } catch (err) { // Catch for an error.
+        } catch (err) { 
             console.log(err);
             return await interaction.reply({ // Send an error embed.
                 embeds: [
