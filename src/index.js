@@ -378,7 +378,6 @@ client.on(Events.MessageDelete, async (msg) => {
             .addFields({name: "Author", value: `*Not Fetchable*`, inline: false})
             .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
             .setTimestamp()
-            .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
             .setFooter({ text: `YourForums Logging System`})]})
     }
 
