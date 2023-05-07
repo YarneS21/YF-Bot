@@ -10,7 +10,7 @@ module.exports = {
     .addSubcommand(command => command.setName('remove').setDescription('Remove a reaction role emoji to a message.').addStringOption(option => option.setName('message-id').setDescription(`Specified message ID will be the message which will have it's reaction disabled.`).setMinLength(1).setMaxLength(200).setRequired(true)).addStringOption(option => option.setName('emoji').setDescription('Specified emoji will be removed from your message.').setRequired(true))),
     async execute(interaction, client) {
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
         const id = await interaction.options.getString('message-id');
         const sub = interaction.options.getSubcommand();
 

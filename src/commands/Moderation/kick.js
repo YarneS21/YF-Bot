@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const config = require('../../../configs/config.js')
+const perms = require('../../../configs/permissions.js')
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('kick')
@@ -14,7 +16,7 @@ module.exports = {
         const ID = users.id;
         const kickedmember = interaction.options.getMember('user');
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!message.member.roles.cache.includes(perms.KickPerms)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
         if (interaction.member.id === ID) return await interaction.reply({ content: 'You **cannot** use the kick power on you, silly goose..', ephemeral: true});
 
         if (!kickedmember) return await interaction.reply({ content: `That user **does not** exist within your server.`, ephemeral: true});
