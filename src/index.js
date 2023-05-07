@@ -358,16 +358,30 @@ client.on(Events.MessageDelete, async (msg) => {
     const logChan = await client.channels.fetch(channelID)
 
    try {
-    logChan.send({ embeds: [new EmbedBuilder()
-        .setColor(config.embedColor)
-        .setTitle(":fire: Message Deleted")
-        .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
-        .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
-        .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
-        .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
-        .setTimestamp()
-        .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
-        .setFooter({ text: `YourForums Logging System`})]})
+    try {
+        logChan.send({ embeds: [new EmbedBuilder()
+            .setColor(config.embedColor)
+            .setTitle(":fire: Message Deleted")
+            .addFields({name: "Message Content", value: `${config.reply}${msg.content.replace(/`/g,"'")}`, inline: false})
+            .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
+            .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
+            .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+            .setTimestamp()
+            .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
+            .setFooter({ text: `YourForums Logging System`})]})
+    } catch (err) {
+        logChan.send({ embeds: [new EmbedBuilder()
+            .setColor(config.embedColor)
+            .setTitle(":fire: Message Deleted")
+            .addFields({name: "Message Content", value: `*Not Fetchable*`, inline: false})
+            .addFields({name: "Message Channel", value: `${config.reply}${msg.channel}`, inline: false})
+            .addFields({name: "Author", value: `${config.reply}${msg.author} - ${msg.author.tag}`, inline: false})
+            .addFields({name: "Deleted By", value: `${config.reply}${entry.executor} - ${entry.executor.tag}`, inline: false})
+            .setTimestamp()
+            .setThumbnail(msg.author.displayAvatarURL({dynamic: true}))
+            .setFooter({ text: `YourForums Logging System`})]})
+    }
+
     } catch (err) {
         return console.log(err);
     }
