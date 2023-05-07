@@ -118,7 +118,7 @@ client.on(Events.MessageCreate, async message => {
         const author = message.author.id
         message.delete()
         let embed = new EmbedBuilder()
-        .setAuthor(`${author}`)
+        .setAuthor(`${message.author.id}`)
         .setDescription(`${message.content.replace(/`/g,"'")}`)
         .setThumbnail(message.author.displayAvatarURL())
         message.react("<:tick:1040008503617671261>")
