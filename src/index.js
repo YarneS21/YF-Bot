@@ -115,12 +115,11 @@ client.on(Events.MessageCreate, async message => {
     })
 
     if (message.channel.id == config.suggestionChannel) {
-        const string = message.content
         const author = message.author.id
         message.delete()
         let embed = new EmbedBuilder()
         .setAuthor(`${author}`)
-        .setDescription(`${string}`)
+        .setDescription(`${message.content.replace(/`/g,"'")}`)
         .setThumbnail(message.author.displayAvatarURL())
         message.react("<:tick:1040008503617671261>")
         message.react("<:cross:1040008993457836174>")
