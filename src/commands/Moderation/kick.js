@@ -53,7 +53,9 @@ module.exports = {
         await kickedmember.send({ embeds: [dmembed] }).catch(err => {
             return;
         })
-
+        const channelID = config.logChannel
+        const logChan = await client.channels.fetch(channelID)
+        await logChan.send(embeds [embed])
         await interaction.reply({ embeds: [embed] });
     }
 }
