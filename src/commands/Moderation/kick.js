@@ -18,7 +18,9 @@ module.exports = {
         const KickPerms = perms.KickPerms
 
         if (interaction.member.roles.cache.some(role => KickPerms.includes(role.id))) {
-            if (!interaction.member.id == ID) {
+            if (interaction.member.id === ID) {
+                interaction.reply({ content: 'You **cannot** use the kick power on you, silly goose..', ephemeral: true});
+            } else {
                 if (kickedmember) {
                     const reason = interaction.options.getString('reason') || 'No reason provided :(';
         
@@ -58,8 +60,6 @@ module.exports = {
                 } else {
                     interaction.reply({ content: `That user **does not** exist within your server.`, ephemeral: true});
                 }
-            } else {
-                interaction.reply({ content: 'You **cannot** use the kick power on you, silly goose..', ephemeral: true});
             }
         } else {
             interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
