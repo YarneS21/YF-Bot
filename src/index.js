@@ -116,9 +116,8 @@ client.on(Events.MessageCreate, async message => {
 
     if (message.channel.id == config.suggestionChannel) {
         message.delete()
-        const suggestionChannel = config.suggestionChannel
-
-        let newMessage = suggestionChannel.send({embeds: [
+        const Channel = await client.channels.fetch(config.suggestionChannel)
+        let newMessage = Channel.send({embeds: [
             new EmbedBuilder()
             .setColor(config.embedColor)
             .setTitle(`${message.author.tag}`)
