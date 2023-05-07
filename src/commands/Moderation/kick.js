@@ -18,7 +18,7 @@ module.exports = {
         const KickPerms = perms.KickPerms
 
         if (interaction.member.roles.cache.some(role => KickPerms.includes(role.id))) {
-            if (!interaction.member.id === ID) {
+            if (!interaction.member.id == ID) {
                 if (kickedmember) {
                     const reason = interaction.options.getString('reason') || 'No reason provided :(';
         
