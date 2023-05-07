@@ -116,7 +116,7 @@ client.on(Events.MessageCreate, async message => {
 
     if (message.channel.id == config.suggestionChannel) {
         message.react("<:tick:1040008503617671261>")
-        message.react("<✝️1040008993457836174>")
+        message.react("<:cross:1040008993457836174>")
     }
 })
 
