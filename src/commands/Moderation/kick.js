@@ -27,10 +27,9 @@ module.exports = {
         .setFooter({ text: '🔨 Kicked from a server'})
         .setTimestamp()
         .setThumbnail(config.picture)
-        
+        .setColor(config.embedColor)
 
         const embed = new EmbedBuilder()
-        .setColor(config.embedColor)
         .setAuthor({ name: '🔨 Kick Tool'})
         .setTitle(`${config.reply}User was kicked!`)
         .addFields({ name: '• User', value: `${config.reply} ${users.tag}`})
@@ -38,6 +37,7 @@ module.exports = {
         .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
         .setThumbnail(config.picture)
         .setFooter({ text: '🔨 Someone got kicked hard'})
+        .setColor(config.embedColor)
         .setTimestamp()
 
         if (interaction.member.roles.cache.some(role => KickPerms.includes(role.id))) {
