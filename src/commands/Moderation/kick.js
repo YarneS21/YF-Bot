@@ -25,7 +25,6 @@ module.exports = {
                     const reason = interaction.options.getString('reason') || 'No reason provided :(';
         
                     const dmembed = new EmbedBuilder()
-                    .setColor(config.embedColor)
                     .setAuthor({ name: '🔨 Kick Tool'})
                     .setTitle(`${config.reply}You were kicked from "${interaction.guild.name}"`)
                     .addFields({ name: '• Server', value: `${config.reply} ${interaction.guild.name}`})
@@ -34,6 +33,7 @@ module.exports = {
                     .setFooter({ text: '🔨 Kicked from a server'})
                     .setTimestamp()
                     .setThumbnail(config.picture)
+                    .setColor(config.embedColor)
             
                     const embed = new EmbedBuilder()
                     .setColor(config.embedColor)
@@ -44,6 +44,7 @@ module.exports = {
                     .addFields({ name: '• Kicked By', value: `${config.reply}${interaction.member} - ${interaction.user.tag}`})
                     .setThumbnail(config.picture)
                     .setFooter({ text: '🔨 Someone got kicked hard'})
+                    .setColor(config.embedColor)
                     .setTimestamp()
             
                     await kickedmember.kick().catch(err => {
