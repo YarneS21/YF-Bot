@@ -118,7 +118,7 @@ client.on(Events.MessageCreate, async message => {
         const string = message.content
         const author = message.author.id
         message.delete()
-        let embed = EmbedBuilder()
+        let embed = new EmbedBuilder()
         .setAuthor(author)
         .setDescription(string)
         .setThumbnail(message.author.displayAvatarURL())
