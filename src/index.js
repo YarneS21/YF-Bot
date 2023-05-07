@@ -448,13 +448,9 @@ client.on(Events.GuildMemberAdd, async (member, err) => {
 })
 
 // MEMBER LEAVE
-const logSchema = require('./Schemas.js/logSchema')
 client.on(Events.GuildMemberRemove, async (member, err) => {
-        const data = await logSchema.findOne({ Guild: member.guild.id });
-
-        const welcomeChannel = client.channels.cache.get(data.Channel);
-
-        const channelwelcome = member.guild.channels.cache.get(welcomeChannel)
+        const channelID = config.welcomeChannel;
+        const channelwelcome = member.guild.channels.cache.get(channelID)
 
         const embedleave = new EmbedBuilder()
         .setColor(config.embedColor)
