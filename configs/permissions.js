@@ -3,7 +3,6 @@ module.exports = {
     UnbanPerms: ["", ""],
     KickPerms: ["", ""],
     WarnPerms: ["", ""],
-    RemoveWarnPerms: ["", ""],
     StickyMessagePerms: ["", ""],
     PollPerms: ["", ""],
 }
