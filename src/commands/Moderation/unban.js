@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const config = require('../../../configs/config.js')
-const perms = require('../../../configs/config.js')
+const perms = require('../../../configs/permissions.js')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('unban')

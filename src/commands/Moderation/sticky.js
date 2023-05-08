@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const stickyschema = require('../../Schemas.js/sticky');
 const config = require('../../../configs/config.js')
-const perms = require('../../../configs/config.js')
+const perms = require('../../../configs/permissions.js')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('sticky')
