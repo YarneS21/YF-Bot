@@ -5,4 +5,6 @@ module.exports = {
     WarnPerms: ["", ""],
     StickyMessagePerms: ["", ""],
     PollPerms: ["", ""],
+    RoleAdd: ["", ""],
+    RoleRemove: ["", ""],
 }

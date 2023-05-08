@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const config = require('../../../configs/config.js')
+const perms = require('../../../configs/permissions.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('role')
@@ -11,57 +12,65 @@ module.exports = {
         
     async execute(interaction) {
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
 
         const username = interaction.options.getUser('user');
         const member = interaction.options.getMember('user');
         const role = interaction.options.getRole('role');
         const sub = interaction.options.getSubcommand();
-
+        const RoleAdd = perms.RoleAdd
+        const RoleRemove = perms.RoleRemove
         switch (sub) {
             
             case 'add':
 
-            const addembed =new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setAuthor({ name: `💳 Role Tool`})
-            .setFooter({ text: `💳 Role Added`})
-            .setTimestamp()
-            .setTitle(`${config.reply} Role Added to ${username.username}`)
-            .addFields({ name: `• User`, value: `${config.reply} ${username}`})
-            .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
-            .setThumbnail(config.picture)
-
-            await member.roles.add(role).catch(err => {
-                addembed.setTitle('> Error!');
-                addembed.setFooter({ text: `💳 Role not Added`});
-                addembed.setFields({ name: `• Error Occured`, value: `${config.reply} Error received trying to add a role to ${username}. **Check** my role position and **permissions** and try again!`});
-                return;
-            })
-
-            await interaction.reply({ embeds: [addembed] });
-
+            if (interaction.member.roles.cache.some(role => RoleAdd.includes(role.id))) {
+                const addembed =new EmbedBuilder()
+                .setColor(config.embedColor)
+                .setAuthor({ name: `💳 Role Tool`})
+                .setFooter({ text: `💳 Role Added`})
+                .setTimestamp()
+                .setTitle(`${config.reply} Role Added to ${username.username}`)
+                .addFields({ name: `• User`, value: `${config.reply} ${username}`})
+                .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
+                .setThumbnail(config.picture)
+    
+                await member.roles.add(role).catch(err => {
+                    addembed.setTitle('> Error!');
+                    addembed.setFooter({ text: `💳 Role not Added`});
+                    addembed.setFields({ name: `• Error Occured`, value: `${config.reply} Error received trying to add a role to ${username}. **Check** my role position and **permissions** and try again!`});
+                    return;
+                })
+    
+                await interaction.reply({ embeds: [addembed] });
+            } else {
+                interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+            }
+    
             break;
             case 'remove':
 
-            const removeembed = new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setAuthor({ name: `💳 Role Tool`})
-            .setFooter({ text: `💳 Role Removed`})
-            .setTimestamp()
-            .setTitle(`${config.reply}Role Removed from ${username.username}`)
-            .addFields({ name: `• User`, value: `${config.reply} ${username}`})
-            .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
-            .setThumbnail(config.picture)
-
-            await member.roles.remove(role).catch(err => {
-                removeembed.setTitle('> Error!');
-                removeembed.setFooter({ text: `💳 Role not Removed`});
-                removeembed.setFields({ name: `• Error Occured`, value: `${config.reply} Error received trying to remove a role from ${username}. **Check** my role position and **permissions** and try again!`});
-                return;
-            })
-        
-            await interaction.reply({ embeds: [removeembed] });
+            if (interaction.member.roles.cache.some(role => RoleRemove.includes(role.id))) {
+                const removeembed = new EmbedBuilder()
+                .setColor(config.embedColor)
+                .setAuthor({ name: `💳 Role Tool`})
+                .setFooter({ text: `💳 Role Removed`})
+                .setTimestamp()
+                .setTitle(`${config.reply}Role Removed from ${username.username}`)
+                .addFields({ name: `• User`, value: `${config.reply} ${username}`})
+                .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
+                .setThumbnail(config.picture)
+    
+                await member.roles.remove(role).catch(err => {
+                    removeembed.setTitle('> Error!');
+                    removeembed.setFooter({ text: `💳 Role not Removed`});
+                    removeembed.setFields({ name: `• Error Occured`, value: `${config.reply} Error received trying to remove a role from ${username}. **Check** my role position and **permissions** and try again!`});
+                    return;
+                })
+            
+                await interaction.reply({ embeds: [removeembed] });
+            } else {
+                interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+            }
 
             break;
             case 'members':
