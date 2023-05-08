@@ -12,13 +12,15 @@ module.exports = {
         
     async execute(interaction) {
 
-
+        const channelID = config.logChannel
+        const logChan = await client.channels.fetch(channelID)
         const username = interaction.options.getUser('user');
         const member = interaction.options.getMember('user');
         const role = interaction.options.getRole('role');
         const sub = interaction.options.getSubcommand();
         const RoleAdd = perms.RoleAdd
         const RoleRemove = perms.RoleRemove
+
         switch (sub) {
             
             case 'add':
@@ -32,6 +34,7 @@ module.exports = {
                 .setTitle(`${config.reply} Role Added to ${username.username}`)
                 .addFields({ name: `• User`, value: `${config.reply} ${username}`})
                 .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
+                .addFields({ name: `• Added By`, value: `${config.reply} ${interaction.member} - ${interaction.member.tag}`})
                 .setThumbnail(config.picture)
     
                 await member.roles.add(role).catch(err => {
@@ -42,6 +45,7 @@ module.exports = {
                 })
     
                 await interaction.reply({ embeds: [addembed] });
+                await logChan.send({embeds: [addembed]})
             } else {
                 interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
             }
@@ -58,8 +62,9 @@ module.exports = {
                 .setTitle(`${config.reply}Role Removed from ${username.username}`)
                 .addFields({ name: `• User`, value: `${config.reply} ${username}`})
                 .addFields({ name: `• Role`, value: `${config.reply} ${role}`})
+                .addFields({ name: `• Removed By`, value: `${config.reply} ${interaction.member} - ${interaction.member.tag}`})
                 .setThumbnail(config.picture)
-    
+
                 await member.roles.remove(role).catch(err => {
                     removeembed.setTitle('> Error!');
                     removeembed.setFooter({ text: `💳 Role not Removed`});
@@ -68,8 +73,10 @@ module.exports = {
                 })
             
                 await interaction.reply({ embeds: [removeembed] });
+                await logChan.send({embeds: [removeembed]})
             } else {
                 interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+                
             }
 
             break;
