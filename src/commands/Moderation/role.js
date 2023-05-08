@@ -10,7 +10,7 @@ module.exports = {
         .addSubcommand(command => command.setName('remove').setDescription('Removes a user from specified role.').addUserOption(option => option.setName('user').setDescription('Specified user will be removed from specified role.').setRequired(true)).addRoleOption(option => option.setName('role').setDescription('Specified role will be removed from specified user.').setRequired(true)))
         .addSubcommand(command => command.setName('members').setDescription('Displays the amount of people who have specified role..').addRoleOption(option => option.setName("role").setDescription(`Specified role's member count will be displayed.`).setRequired(true))),
         
-    async execute(interaction) {
+    async execute(interaction, client) {
 
         const channelID = config.logChannel
         const logChan = await client.channels.fetch(channelID)
